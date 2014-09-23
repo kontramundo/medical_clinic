@@ -1530,9 +1530,9 @@ var App = function () {
       }
 
       /*NanoScroller*/      
-      if(config.nanoScroller){
+      /*if(config.nanoScroller){
         $(".nscroller").nanoScroller();     
-      }
+      }*/
       
       /*Nestable Lists*/
       if(config.nestableLists){

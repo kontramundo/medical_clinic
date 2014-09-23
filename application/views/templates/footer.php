@@ -3,7 +3,7 @@
 	<script type="text/javascript" src="<?=base_url();?>assets/js/jquery.select2/select2.min.js"></script>
 	<!-- <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.parsley/dist/parsley.js"></script> -->
 	<script type="text/javascript" src="<?=base_url();?>assets/js/bootstrap.slider/js/bootstrap-slider.js"></script>
-	<script type="text/javascript" src="<?=base_url();?>assets/js/jquery.nanoscroller/jquery.nanoscroller.js"></script>
+	<!-- <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.nanoscroller/jquery.nanoscroller.js"></script> -->
 	<script type="text/javascript" src="<?=base_url();?>assets/js/jquery.nestable/jquery.nestable.js"></script>
 	<script type="text/javascript" src="<?=base_url();?>assets/js/behaviour/general.js"></script>
 	<script type="text/javascript" src="<?=base_url();?>assets/js/jquery.ui/jquery-ui.js"></script>

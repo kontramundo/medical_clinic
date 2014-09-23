@@ -1,4 +1,8 @@
 <?php
+//set_time_limit(0);
+ini_set('memory_limit', '512M');
+//ini_set('post_max_size', '64M');
+
 class Historia_clinica extends CI_Controller 
 {
 	public function __construct()
@@ -303,34 +307,25 @@ class Historia_clinica extends CI_Controller
 
 	public function test()
 	{
-		$this->load->library('datatables2');
-        
-        $this->datatables2
-        ->select('id_historia_clinica, nombre, edad, sexo, telefono, direccion')
-        ->from('view_historia_clinica')
-        ->add_column('detalle', '
-        						<button type="button" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>								  
-								  <button type="button" class="btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i></button>
-								  <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
-								');
+		$resultado=$this->historia_clinica_model->get_table('id_historia_clinica', 'view_historia_clinica');
         
 
-        /*
-        ->add_column('detalle', '<a href="$1" class="btn-sm btn-primary"><i class="fa fa-align-left"></i></a>', 'id_historia_clinica')
-        ->add_column('editar', '<a href="$1" class="btn-sm btn-success"><i class="fa fa-pencil-square-o"></i></a>', 'id_historia_clinica')
-        ->add_column('eliminar', '<a href="$1" class="btn-sm btn-danger"><i class="fa fa-trash-o"></i></a>', 'id_historia_clinica');
-		*/
+        $i=0;
+	    foreach ($resultado as $fila) 
+	    {
+	    	$json_array['data'][$i][]=$fila->id_historia_clinica;
+	    	$json_array['data'][$i][]=$fila->nombre;
+	    	$json_array['data'][$i][]=$fila->edad;
+	    	$json_array['data'][$i][]=$fila->sexo;
+	    	$json_array['data'][$i][]=$fila->telefono;
+	    	$json_array['data'][$i][]=$fila->direccion;
+	    	$json_array['data'][$i][]=$fila->id_historia_clinica;
+	    	$i++;
+	    }
 
-        //$data['result'] = $this->datatables2->generate();
-  		//$this->load->view('ajax', $data);
-        
-        echo $this->datatables2->generate();
+        echo json_encode($json_array, true);
 	}
-	
 
-	public function test2()
-	{
-		$this->datatables->set_datatable('historias_clinicas', 'id_historia_clinica');
-	}
+
 }
 ?>

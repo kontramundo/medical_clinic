@@ -27,7 +27,8 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/bootstrap.daterangepicker/daterangepicker-bs3.css" />
 
     <!-- DataTables -->
-    <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/datatables/css/jquery.dataTables.css">
+    <!-- <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/datatables/css/jquery.dataTables.css"> -->
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
 
     <!-- Modals -->
     <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/jquery.niftymodals/css/component.css" />
@@ -48,7 +49,9 @@
     <!-- JQUERY -->
     <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
 
+    <!-- DATATABLE -->
     <script type="text/javascript" src="<?=base_url();?>assets/js/datatables/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 
 
     <!-- JS General -->

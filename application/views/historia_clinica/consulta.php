@@ -43,24 +43,11 @@
 
 	$(document).ready(function(){
 
-     	$('#example').dataTable( {
-        "paginationType": "full_numbers",
-        "processing": true,
-        "serverSide": true,
-        "ajax": "<?=base_url();?>historia_clinica/test",
-         "columns": [
-            { "data": "id_historia_clinica" },
-            { "data": "nombre" },
-            { "data": "edad" },
-            { "data": "sexo" },
-            { "data": "telefono" },
-            { "data": "direccion" },
-            { "data": "detalle", "sClass": "text-center"}
-          ],
-
-           "language": {
+     	$('#example').dataTable( {     
+            "ajax": "<?=base_url();?>historia_clinica/test",
+            "language": {
                 "processing": "<i class='fa fa-spinner fa-spin'></i> Cargando...",
-                "loadingRecords": "",
+                "loadingRecords": "<i class='fa fa-spinner fa-spin'></i> Cargando...",
                 "lengthMenu": "Mostrar _MENU_ registros por p&aacute;gina",
                 "zeroRecords": "No se encontro ning&uacute;n registro",
                 "info": "Registros del _START_ al _END_ de un total de _TOTAL_ registros",
@@ -73,7 +60,54 @@
                     "previous":   "Anterior"
                 },
                 'search': 'Buscar:'
-            }
-      } );
- });
+            },
+            "columnDefs": [{
+                "targets": [6],
+                //"data": null,
+                "render": function (data, type, full) {
+                    //return '<div class="row"><div class="col-md-3"><button type="button" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button></div><div class="col-md-3"><button type="button" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></button></div><div class="col-md-3"><button type="button" class="btn btn-sm btn-success"><i class="fa fa-pencil-square-o"></i></button></div><div class="col-md-3"><button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button></div></div>';
+                    return '<button type="button" class="btn btn-sm btn-info imprimir" data-id="'+data[0]+'"><i class="fa fa-print"></i></button>\
+                            <button type="button" class="btn btn-sm btn-success notas" data-id="'+data[0]+'"><i class="fa fa-pencil"></i></button>\
+                            <button type="button" class="btn btn-sm btn-success editar" data-id="'+data[0]+'"><i class="fa fa-pencil-square-o"></i></button>\
+                            <button type="button" class="btn btn-sm btn-danger eliminar" data-id="'+data[0]+'"><i class="fa fa-trash-o"></i></button>';
+                }
+            }]
+        });
+    
+        //Imprimir
+        $("#example").on('click', '.imprimir', function(evento){
+            evento.preventDefault();
+
+            var id = $(this).data('id');
+
+            alert('Imprimir '+id);
+        });
+
+        //Notas
+        $("#example").on('click', '.notas', function(evento){
+            evento.preventDefault();
+
+            var id = $(this).data('id');
+
+            alert('Notas '+id);
+        });
+
+        //Editar
+        $("#example").on('click', '.editar', function(evento){
+            evento.preventDefault();
+
+            var id = $(this).data('id');
+
+            alert('Editar '+id);
+        });
+
+        //Eliminar
+        $("#example").on('click', '.eliminar', function(evento){
+            evento.preventDefault();
+
+            var id = $(this).data('id');
+
+            alert('Eliminar '+id);
+        });
+    });
 </script>
