@@ -1,5 +1,7 @@
 		</div>
 	</div>
+
+	<script type="text/javascript" src="<?=base_url();?>assets/js/lightbox/js/jquery.lightbox.min.js"></script>
 	<script type="text/javascript" src="<?=base_url();?>assets/js/jquery.select2/select2.min.js"></script>
 	<!-- <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.parsley/dist/parsley.js"></script> -->
 	<script type="text/javascript" src="<?=base_url();?>assets/js/bootstrap.slider/js/bootstrap-slider.js"></script>

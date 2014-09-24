@@ -326,6 +326,9 @@ class Historia_clinica extends CI_Controller
         echo json_encode($json_array, true);
 	}
 
-
+	function notas()
+	{
+		$this->load->view('historia_clinica/notas');
+	}
 }
 ?>

@@ -1,9 +1,4 @@
-<style type="text/css">
-    
-    .test{
-        background-color: gray;
-    }
-</style>
+
 
 <div class="page-head">
 	<h2><i class="fa fa-stethoscope"></i> Historia Clinica</h2>
@@ -80,7 +75,9 @@
 
             var id = $(this).data('id');
 
-            alert('Imprimir '+id);
+
+             alert('Imprimir '+id);
+
         });
 
         //Notas
@@ -89,7 +86,22 @@
 
             var id = $(this).data('id');
 
-            alert('Notas '+id);
+            var size   = { x: $(window).width(), y: $(window).height() };
+            var width  = size.x * 90 / 100;
+            var height = size.y * 90 / 100;
+
+
+            $.lightbox("<?=base_url('historia_clinica/notas');?>", {
+                'width'       : '75p',
+                'height'      : '75p',
+                'autoresize'  : true,
+                'modal' : true,
+                'move' : false,
+                'iframe': true,
+                'onClose'    : function() {
+                    
+                    }
+            });
         });
 
         //Editar

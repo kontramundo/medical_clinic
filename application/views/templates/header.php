@@ -16,19 +16,22 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/bootstrap.switch/bootstrap-switch.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/bootstrap.datetimepicker/css/bootstrap-datetimepicker.min.css" />
 
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/datatables/css/jquery.dataTables.css">
+    <!-- <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css"> -->
+
+    <!-- Lightbox -->
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/js/lightbox/css/jquery.lightbox.css');?>" />
+    <!--[if IE 6]><link rel="stylesheet" type="text/css" href="<?=base_url('assets/js/lightbox/css/jquery.lightbox.ie6.css');?>" /><![endif]-->
+
     <!-- Select2 -->
     <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/jquery.select2/select2.css" />
-      
       
     <!-- Slider -->
     <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/bootstrap.slider/css/slider.css" />
       
     <!-- DateRange -->
     <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/bootstrap.daterangepicker/daterangepicker-bs3.css" />
-
-    <!-- DataTables -->
-    <!-- <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/datatables/css/jquery.dataTables.css"> -->
-    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
 
     <!-- Modals -->
     <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/js/jquery.niftymodals/css/component.css" />
@@ -51,7 +54,7 @@
 
     <!-- DATATABLE -->
     <script type="text/javascript" src="<?=base_url();?>assets/js/datatables/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <!-- <script type="text/javascript" src="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script> -->
 
 
     <!-- JS General -->
