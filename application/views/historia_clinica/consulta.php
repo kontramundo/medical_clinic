@@ -39,7 +39,7 @@
 	$(document).ready(function(){
 
      	$('#example').dataTable( {     
-            "ajax": "<?=base_url();?>historia_clinica/test",
+            "ajax": "<?=base_url();?>historia_clinica/grid_consulta",
             "language": {
                 "processing": "<i class='fa fa-spinner fa-spin'></i> Cargando...",
                 "loadingRecords": "<i class='fa fa-spinner fa-spin'></i> Cargando...",
@@ -91,7 +91,7 @@
             var height = size.y * 90 / 100;
 
 
-            $.lightbox("<?=base_url('historia_clinica/notas');?>", {
+            $.lightbox("<?=base_url('historia_clinica/notas_evolucion/"+id+"');?>", {
                 'width'       : '75p',
                 'height'      : '75p',
                 'autoresize'  : true,
@@ -110,7 +110,17 @@
 
             var id = $(this).data('id');
 
-            alert('Editar '+id);
+            $.lightbox("<?=base_url('historia_clinica/editar/"+id+"');?>", {
+                'width'       : '90p',
+                'height'      : '90p',
+                'autoresize'  : true,
+                'modal' : true,
+                'move' : false,
+                'iframe': true,
+                'onClose'    : function() {
+                    
+                    }
+            });
         });
 
         //Eliminar

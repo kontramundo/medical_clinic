@@ -26,20 +26,22 @@ class Historia_clinica extends CI_Controller
 
 	public function index()
 	{
+		/*
 		$this->load->helper('date');
 
 		$datestring = "%d-%m-%Y";
 
 		$data['fecha']=mdate($datestring);
+		*/
 
-		$data['estado_civil']     = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'cat_estado_civil');
-		$data['escolaridades']    = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'cat_escolaridad');
-		$data['religiones']       = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'cat_religiones');
+		$data['estado_civil']     = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_estado_civil');
+		$data['escolaridades']    = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_escolaridad');
+		$data['religiones']       = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_religiones');
 		$data['estados']          = $this->historia_clinica_model->get_table('estado', 'cat_estados');
-		$data['heredofamiliares'] = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'cat_heredofamiliares');
-		$data['patologicos']      = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'cat_patologicos');
-		$data['no_patologicos']   = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'cat_no_patologicos');
-		$data['obstetricos']      = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'cat_obstetricos');
+		$data['heredofamiliares'] = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_heredofamiliares');
+		$data['patologicos']      = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_patologicos');
+		$data['no_patologicos']   = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_no_patologicos');
+		$data['obstetricos']      = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_obstetricos');
 		
 		$this->load->view('templates/header');
 		$this->load->view('historia_clinica/registro', $data);
@@ -50,7 +52,7 @@ class Historia_clinica extends CI_Controller
 	{
 		$id = $this->input->post('id');
 
-		$municipios = $this->historia_clinica_model->get_table_where(array('id_cat_estado' => $id), 'municipio', 'cat_municipios');
+		$municipios = $this->historia_clinica_model->get_table_where(array('id_cat_estado' => $id), 'municipio', 'ASC', 'cat_municipios');
 
 		foreach ($municipios AS $municipio)
 		{
@@ -305,7 +307,7 @@ class Historia_clinica extends CI_Controller
 		$this->load->view('templates/footer');
 	}
 
-	public function test()
+	public function grid_consulta()
 	{
 		$resultado=$this->historia_clinica_model->get_table('id_historia_clinica', 'view_historia_clinica');
         
@@ -326,9 +328,63 @@ class Historia_clinica extends CI_Controller
         echo json_encode($json_array, true);
 	}
 
-	function notas()
+	function notas_evolucion($id_historia_clinica)
 	{
-		$this->load->view('historia_clinica/notas');
+		$resultado=$this->historia_clinica_model->get_table_where(array('id_historia_clinica' => $id_historia_clinica, 'borrado' => '0'), 'id_historia_clinica', 'ASC', 'historias_clinicas');
+		$resultado_n=$this->historia_clinica_model->get_table_where(array('id_historia_clinica' => $id_historia_clinica, 'borrado' => '0'), 'fecha_registro', 'DESC', 'notas_evolucion');
+
+		$data['id_historia_clinica'] = $id_historia_clinica;
+
+		foreach ($resultado as $paciente) 
+		{
+			$data['paciente'] 	 = $paciente->nombre.' '.$paciente->apellidos; 			
+		}
+		
+		$data['notas_evolucion'] = $resultado_n; 
+
+		$this->load->view('historia_clinica/notas', $data);
+	}
+
+	public function insertar_nota_evolucion()
+	{
+		//Recibe variables del formulario
+		$id_historia_clinica    = $this->input->post('id_historia_clinica');
+		$nota           		= $this->input->post('nota');
+
+
+
+		//Arreglo con los datos para insert
+		$datos = array(
+			'id_historia_clinica'   => $id_historia_clinica,
+			'nota'           		=> $nota
+		);
+
+		//Inserta Nota
+		$id_nota_evolucion= $this->historia_clinica_model->insert('notas_evolucion', $datos);
+
+		if($id_nota_evolucion)
+		{
+			echo "1";
+		}
+	}
+
+	function editar($id_historia_clinica)
+	{
+		$resultado=$this->historia_clinica_model->get_table('id_historia_clinica', 'view_historia_clinica');
+
+		$data['id_historia_clinica'] = $id_historia_clinica;
+
+		$data['estado_civil']     = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_estado_civil');
+		$data['escolaridades']    = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_escolaridad');
+		$data['religiones']       = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_religiones');
+		$data['estados']          = $this->historia_clinica_model->get_table('estado', 'cat_estados');
+		$data['heredofamiliares'] = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_heredofamiliares');
+		$data['patologicos']      = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_patologicos');
+		$data['no_patologicos']   = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_no_patologicos');
+		$data['obstetricos']      = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_obstetricos');
+
+
+		$this->load->view('historia_clinica/editar', $data);
 	}
 }
 ?>

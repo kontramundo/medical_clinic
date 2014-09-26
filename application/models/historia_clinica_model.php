@@ -9,10 +9,10 @@ class Historia_clinica_model extends CI_Model {
 		return $query->result();
 	}
 
-	function get_table_where($where, $order_by, $table)
+	function get_table_where($where, $columna, $order_by, $table)
 	{	
 		$this->db->where($where);
-		$this->db->order_by($order_by, "ASC");
+		$this->db->order_by($columna, $order_by);
 		$query = $this->db->get($table);
 
 		return $query->result();
