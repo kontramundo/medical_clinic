@@ -171,9 +171,13 @@ class Historia_clinica extends CI_Controller
 		
 		
 		$heredofamiliares =$this->input->post('heredofamiliares');
+			$otro_h		  =$this->input->post('otro_h');
 		$patologicos      =$this->input->post('patologicos');
+			$otro_p		  =$this->input->post('otro_p');
 		$no_patologicos   =$this->input->post('no_patologicos');
+			$otro_np		  =$this->input->post('otro_np');
 		$obstetricos      =$this->input->post('obstetricos');
+			$otro_o		  =$this->input->post('otro_o');
 		$padecimiento     =$this->input->post('padecimiento');
 		
 		$peso             =$this->input->post('peso');
@@ -193,6 +197,7 @@ class Historia_clinica extends CI_Controller
 		//Verifica si hay valor, de lo contrario aisgna NULL
 		$estado_c    = empty($estado_c) 	? NULL : $estado_c;
 		$escolaridad = empty($escolaridad) 	? NULL : $escolaridad;
+		$lugar_n_e   = empty($lugar_n_e)    ? NULL : $lugar_n_e;
 		$lugar_n     = empty($lugar_n) 		? NULL : $lugar_n;
 		$religion    = empty($religion) 	? NULL : $religion;
 		$colonia     = empty($colonia) 		? NULL : $colonia;
@@ -208,6 +213,7 @@ class Historia_clinica extends CI_Controller
 			'id_cat_estado_civil' => $estado_c,
 			'id_cat_escolaridad'  => $escolaridad,
 			'ocupacion'           => $ocupacion,
+			'id_lugar_n_e'        => $lugar_n_e,
 			'id_lugar_n'          => $lugar_n,
 			'id_cat_religion'     => $religion,
 			'telefono'            => $telefono,
@@ -248,6 +254,11 @@ class Historia_clinica extends CI_Controller
 
 				$this->historia_clinica_model->insert_batch('rel_hc_heredofamiliares', $datos_heredo);
 			}
+				//OTRO
+				if($otro_h)
+				{
+					$this->historia_clinica_model->insert();
+				}
 
 			//Inserta Patologicos
 			if($patologicos)
@@ -370,19 +381,20 @@ class Historia_clinica extends CI_Controller
 
 	function editar($id_historia_clinica)
 	{
-		$resultado=$this->historia_clinica_model->get_table('id_historia_clinica', 'view_historia_clinica');
-
 		$data['id_historia_clinica'] = $id_historia_clinica;
 
 		$data['estado_civil']     = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_estado_civil');
 		$data['escolaridades']    = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_escolaridad');
 		$data['religiones']       = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_religiones');
 		$data['estados']          = $this->historia_clinica_model->get_table('estado', 'cat_estados');
-		$data['heredofamiliares'] = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_heredofamiliares');
-		$data['patologicos']      = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_patologicos');
-		$data['no_patologicos']   = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_no_patologicos');
-		$data['obstetricos']      = $this->historia_clinica_model->get_table_where(array('borrado' => '0'), 'nombre', 'ASC', 'cat_obstetricos');
 
+		$data['detalle']		  = $this->historia_clinica_model->get_table_where(array('id_historia_clinica' => $id_historia_clinica), 'id_historia_clinica', 'ASC', 'historias_clinicas', 'row');
+
+
+		$data['heredofamiliares'] 	=  	$this->historia_clinica_model->rel_hc_heredofamiliares($id_historia_clinica);
+		$data['patologicos']		=	$this->historia_clinica_model->rel_hc_patologicos($id_historia_clinica);
+		$data['no_patologicos']		=	$this->historia_clinica_model->rel_hc_no_patologicos($id_historia_clinica);
+		$data['obstetricos']		=	$this->historia_clinica_model->rel_hc_obstetricos($id_historia_clinica);
 
 		$this->load->view('historia_clinica/editar', $data);
 	}

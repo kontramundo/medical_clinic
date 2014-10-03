@@ -151,7 +151,13 @@
 	                                <?php 
 	                            endforeach;
 		                        ?>
+		                        <div class="radio">
+		                        	<label>
+		                        		<input type="text" class="form-control" name="otro_h" id="otro_h" placeholder="Otro">
+		                        	</label>
+		                        </div>
 			                </div>
+
 			            </div>
 
 			            <div class="form-group">
@@ -169,6 +175,11 @@
 	                                <?php 
 	                            endforeach;
 	                        	?>
+	                        	<div class="radio">
+		                        	<label>
+		                        		<input type="text" class="form-control" name="otro_p" id="otro_p" placeholder="Otro">
+		                        	</label>
+		                        </div>
 			                </div>
 			            </div>
 
@@ -187,6 +198,11 @@
 	                                <?php 
 	                            endforeach;
 	                        	?>
+	                        	<div class="radio">
+		                        	<label>
+		                        		<input type="text" class="form-control" name="otro_np" id="otro_np" placeholder="Otro">
+		                        	</label>
+		                        </div>
 			                </div>
 			            </div>
 
@@ -205,6 +221,11 @@
 	                                <?php 
 	                            endforeach;
 	                        	?>
+	                        	<div class="radio">
+		                        	<label>
+		                        		<input type="text" class="form-control" name="otro_o" id="otro_o" placeholder="Otro">
+		                        	</label>
+		                        </div>
 			                </div>
 			            </div>
 

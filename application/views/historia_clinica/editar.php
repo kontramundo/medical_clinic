@@ -57,19 +57,19 @@
           </div>
           <div class="content"> 
             <div class="form-group">
-              <label for="nombre">Nombre</label> <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingrese Nombre" >
+              <label for="nombre">Nombre</label> <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingrese Nombre" value="<?=$detalle->nombre;?>">
             </div>
             <div class="form-group">
-              <label for="apellidos">Apellidos</label> <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Ingrese Apellidos" >
+              <label for="apellidos">Apellidos</label> <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Ingrese Apellidos" value="<?=$detalle->apellidos;?>">
             </div>
             <div class="form-group"> 
-              <label for="edad">Edad</label> <input type="text" class="form-control solo_numeros" name="edad" id="edad" maxlength="2" placeholder="Ingrese Edad">
+              <label for="edad">Edad</label> <input type="text" class="form-control solo_numeros" name="edad" id="edad" maxlength="2" placeholder="Ingrese Edad" value="<?=$detalle->edad;?>">
             </div> 
             <div class="form-group">
                       <label for="sexo">Sexo</label>
                       <div class="col-sm-12">
-                        <label class="radio-inline sexo_l"> <input type="radio"  name="sexo" class="icheck sexo" value="Femenino"> Femenino</label> 
-                        <label class="radio-inline sexo_l"> <input type="radio" name="sexo" class="icheck sexo" value="Masculino"> Masculino</label> 
+                        <label class="radio-inline sexo_l"> <input type="radio"  name="sexo" class="icheck sexo" value="Femenino" <?php if($detalle->sexo=='Femenino') echo 'checked';?>> Femenino</label> 
+                        <label class="radio-inline sexo_l"> <input type="radio" name="sexo" class="icheck sexo" value="Masculino" <?php if($detalle->sexo=='Masculino') echo 'checked';?>> Masculino</label> 
                       </div>
                   </div>
                    <div class="clearfix"></div>
@@ -80,9 +80,9 @@
                 <?php
                 foreach ($estado_civil as $estado_c):
                   ?>
-                                <option value="<?=$estado_c->id_cat_estado_civil?>"><?=utf8_decode($estado_c->nombre)?></option>
-                                <?php 
-                            endforeach;
+                      <option value="<?=$estado_c->id_cat_estado_civil?>" <?php if($detalle->id_cat_estado_civil==$estado_c->id_cat_estado_civil) echo 'selected';?>><?=utf8_decode($estado_c->nombre)?></option>
+                  <?php 
+                endforeach;
                 ?>
               </select>
             </div> 
@@ -93,27 +93,27 @@
                   <?php
                 foreach ($escolaridades as $escolaridad):
                   ?>
-                                <option value="<?=$escolaridad->id_cat_escolaridad;?>"><?=utf8_decode($escolaridad->nombre)?></option>
-                                <?php 
-                            endforeach;
+                  <option value="<?=$escolaridad->id_cat_escolaridad;?>" <?php if($detalle->id_cat_escolaridad==$escolaridad->id_cat_escolaridad) echo 'selected';?>><?=utf8_decode($escolaridad->nombre)?></option>
+                  <?php 
+                endforeach;
                 ?>
               </select>
             </div> 
             <div class="form-group"> 
               <label for="ocupacion">Ocupaci&oacute;n</label>
-              <input type="text" class="form-control" name="ocupacion" id="ocupacion" placeholder="Ingrese Ocupacion">
+              <input type="text" class="form-control" name="ocupacion" id="ocupacion" placeholder="Ingrese Ocupacion" value="<?=$detalle->ocupacion;?>">
             </div> 
             <div class="form-group"> 
               <label for="lugar_n_e">Lugar de Nacimiento</label>
               <select name="lugar_n_e" id="lugar_n_e" class="form-control">
                   <option value="" selected>Seleccione Lugar de Nacimiento</option>
                   <?php     
-                            foreach ($estados as $estado):
-                              ?>
-                                <option value="<?=$estado->id_cat_estado?>"><?=$estado->estado;?></option>
-                                <?php 
-                            endforeach;
-                            ?>
+                  foreach ($estados as $estado):
+                    ?>
+                      <option value="<?=$estado->id_cat_estado?>" <?php if($detalle->id_lugar_n==$estado->id_cat_estado) echo 'selected';?>><?=$estado->estado;?></option>
+                      <?php 
+                  endforeach;
+                  ?>
               </select>
             </div> 
               <div class="form-group"> 
@@ -128,25 +128,25 @@
                 <?php
                 foreach ($religiones as $religion):
                   ?>
-                                <option value="<?=$religion->id_cat_religion?>"><?=utf8_decode($religion->nombre)?></option>
-                                <?php 
-                            endforeach;
+                  <option value="<?=$religion->id_cat_religion?>" <?php if($detalle->id_cat_religion==$religion->id_cat_religion) echo 'selected';?> ><?=utf8_decode($religion->nombre)?></option>
+                  <?php 
+                endforeach;
                 ?>
               </select>
             </div>
             <div class="form-group"> 
               <label for="telefono">Tel&eacute;fono</label>
-              <input type="text" class="form-control solo_numeros" name="telefono" id="telefono" maxlength="10" placeholder="Ingrese Tel&eacute;fono">
+              <input type="text" class="form-control solo_numeros" name="telefono" id="telefono" maxlength="10" placeholder="Ingrese Tel&eacute;fono" value="<?=$detalle->telefono;?>">
             </div>
             <div class="form-group"> 
               <label for="codigo_postal">C&oacute;digo Postal</label>
-              <input type="text" class="form-control solo_numeros" name="codigo_postal" id="codigo_postal" maxlength="5" placeholder="Ingrese C&oacute;digo Postal">
+              <input type="text" class="form-control solo_numeros" name="codigo_postal" id="codigo_postal" maxlength="5" placeholder="Ingrese C&oacute;digo Postal" value="<?=$detalle->codigo_postal;?>" >
             </div>
               <div id="res_codigo_postal"><!-- Imprime Select Colonia-Municipio-Estado --></div>
 
             <div class="form-group"> 
               <label for="domicilio">Calle</label>
-              <input type="text" class="form-control" name="domicilio" id="domicilio" placeholder="Ingrese Domicilio">
+              <input type="text" class="form-control" name="domicilio" id="domicilio" placeholder="Ingrese Domicilio" value="<?=$detalle->calle;?>">
             </div>
           </div>
         </div>  
@@ -158,15 +158,15 @@
           <div class="content"> 
             <div class="form-group"> 
               <label for="medico">M&eacute;dico Familiar</label>
-              <input type="text" class="form-control" name="medico" id="medico" placeholder="Ingrese M&eacute;dico Familiar">
+              <input type="text" class="form-control" name="medico" id="medico" placeholder="Ingrese M&eacute;dico Familiar" value="<?=$detalle->medico_familiar;?>">
             </div> 
             <div class="form-group"> 
               <label for="direccion_m">Direcci&oacute;n</label>
-              <input type="text" class="form-control" name="direccion_m" id="direccion_m" placeholder="Ingrese Direcci&oacute;n">
+              <input type="text" class="form-control" name="direccion_m" id="direccion_m" placeholder="Ingrese Direcci&oacute;n" value="<?=$detalle->direccion_m;?>">
             </div> 
             <div class="form-group"> 
               <label for="telefono_m">Tel&eacute;fono</label>
-              <input type="text" class="form-control solo_numeros" name="telefono_m" id="telefono_m" maxlength="10" placeholder="Ingrese Tel&eacute;fono">
+              <input type="text" class="form-control solo_numeros" name="telefono_m" id="telefono_m" maxlength="10" placeholder="Ingrese Tel&eacute;fono" value="<?=$detalle->telefono_m;?>">
             </div> 
           </div>
         </div>      
@@ -182,16 +182,17 @@
                       <label class="col-sm-3 control-label">Antecedentes Heredofamiliares</label>
                       <div class="col-sm-9">
                         <?php 
-                            foreach ($heredofamiliares as $heredo):
-                              ?>
-                                  <div class="radio">
-                    <label>
-                        <input type="checkbox" name="heredofamiliares[]" class="icheck heredofamiliares" value="<?=$heredo->id_cat_heredofamiliar?>"> <?=$heredo->nombre;?>
-                    </label>
-                  </div>
-                                  <?php 
-                              endforeach;
-                            ?>
+                        foreach ($heredofamiliares as $heredo):
+                          ?>
+                          <div class="radio">
+                            <label>
+                                <input type="checkbox" name="heredofamiliares[]" class="icheck heredofamiliares" value="<?=$heredo->id_cat_heredofamiliar?>" <?=$heredo->checked;?>> 
+                                <?=$heredo->nombre;?>
+                            </label>
+                          </div>
+                          <?php 
+                        endforeach;
+                        ?>
                       </div>
                   </div>
 
@@ -199,17 +200,17 @@
                       <label class="col-sm-3 control-label">Personales Patol&oacute;gicos</label>
                       <div class="col-sm-9">
                         <?php 
-                            foreach ($patologicos as $patolo):
-                              ?>
-                                  <div class="radio">
-                    <label>
-                      <input type="checkbox" name="patologicos[]" class="icheck patologicos" value="<?=$patolo->id_cat_patologico?>">
-                      <?=$patolo->nombre;?>
-                    </label>
-                  </div>
-                                  <?php 
-                              endforeach;
-                            ?>
+                        foreach ($patologicos as $patolo):
+                          ?>
+                          <div class="radio">
+                            <label>
+                              <input type="checkbox" name="patologicos[]" class="icheck patologicos" value="<?=$patolo->id_cat_patologico?>" <?=$patolo->checked;?>>
+                              <?=$patolo->nombre;?>
+                            </label>
+                          </div>
+                          <?php 
+                        endforeach;
+                        ?>
                       </div>
                   </div>
 
@@ -217,41 +218,41 @@
                       <label class="col-sm-3 control-label">Personales No Patol&oacute;gicos</label>
                       <div class="col-sm-9">
                         <?php 
-                            foreach ($no_patologicos as $no_patolo):
-                              ?>
-                                  <div class="radio">
-                    <label>
-                      <input type="checkbox" name="no_patologicos[]" class="icheck no_patologicos" value="<?=$no_patolo->id_cat_no_patologico?>"> 
-                      <?=$patolo->nombre;?>
-                    </label>
-                  </div>
-                                  <?php 
-                              endforeach;
-                            ?>
+                        foreach ($no_patologicos as $no_patolo):
+                          ?>
+                          <div class="radio">
+                            <label>
+                              <input type="checkbox" name="no_patologicos[]" class="icheck no_patologicos" value="<?=$no_patolo->id_cat_no_patologico?>" <?=$no_patolo->checked;?>> 
+                              <?=$patolo->nombre;?>
+                            </label>
+                          </div>
+                          <?php 
+                        endforeach;
+                        ?>
                       </div>
                   </div>
 
-                  <div class="form-group"  id="div_gineco_o" style="display:none;">
+                  <div class="form-group"  id="div_gineco_o" <?php if($detalle->sexo!='Femenino') echo 'style="display:none;"';?>>
                       <label class="col-sm-3 control-label">Gineco-obst&eacute;tricos</label>
                       <div class="col-sm-9">
                         <?php 
-                            foreach ($obstetricos as $obste):
-                              ?>
-                                  <div class="radio">
-                    <label>
-                      <input type="checkbox" name="obstetricos[]" class="icheck obstetricos" value="<?=$obste->id_cat_obstetrico?>"> 
-                      <?=$obste->nombre;?>
-                    </label>
-                  </div>
-                                  <?php 
-                              endforeach;
-                            ?>
+                        foreach ($obstetricos as $obste):
+                          ?>
+                          <div class="radio">
+                            <label>
+                              <input type="checkbox" name="obstetricos[]" class="icheck obstetricos" value="<?=$obste->id_cat_obstetrico?>" <?=$obste->checked;?>> 
+                              <?=$obste->nombre;?>
+                            </label>
+                          </div>
+                          <?php 
+                        endforeach;
+                        ?>
                       </div>
                   </div>
 
                    <div class="form-group">
                       <label for="padecimiento">Padecimiento Actual</label>
-                      <textarea class="form-control" name="padecimiento" id="padecimiento" placeholder="Ingrese Padecimiento"></textarea>
+                      <textarea class="form-control" name="padecimiento" id="padecimiento" placeholder="Ingrese Padecimiento"><?=$detalle->padecimiento;?></textarea>
                   </div>
           </div>
         </div>        
@@ -265,23 +266,23 @@
           <div class="content">
             <div class="form-group"> 
               <label for="peso">Peso</label>
-              <input type="text" class="form-control solo_numeros" name="peso" id="peso" placeholder="Ingrese Peso">
+              <input type="text" class="form-control solo_numeros" name="peso" id="peso" placeholder="Ingrese Peso" value="<?=$detalle->peso;?>">
             </div> 
             <div class="form-group"> 
               <label for="talla">Talla</label>
-              <input type="text" class="form-control solo_numeros" name="talla" id="talla" placeholder="Ingrese Talla">
+              <input type="text" class="form-control solo_numeros" name="talla" id="talla" placeholder="Ingrese Talla" value="<?=$detalle->talla;?>">
             </div> 
             <div class="form-group"> 
               <label for="fr">F.R.</label>
-              <input type="text" class="form-control solo_numeros" name="fr" id="fr" placeholder="Ingrese F.R.">
+              <input type="text" class="form-control solo_numeros" name="fr" id="fr" placeholder="Ingrese F.R." value="<?=$detalle->fr;?>">
             </div>
             <div class="form-group"> 
               <label for="fc">F.C.</label>
-              <input type="text" class="form-control solo_numeros" name="fc" id="fc" placeholder="Ingrese F.C.">
+              <input type="text" class="form-control solo_numeros" name="fc" id="fc" placeholder="Ingrese F.C." value="<?=$detalle->fc;?>">
             </div>
             <div class="form-group"> 
               <label for="ta">T/A</label>
-              <input type="text" class="form-control solo_numeros" name="ta" id="ta" placeholder="Ingrese T/A">
+              <input type="text" class="form-control solo_numeros" name="ta" id="ta" placeholder="Ingrese T/A" value="<?=$detalle->ta;?>">
             </div>
           </div>
         </div>
@@ -293,19 +294,19 @@
           <div class="content"> 
             <div class="form-group">
                       <label for="comentarios">Comentarios</label>
-                      <textarea class="form-control" rows="3" name="comentarios" id="comentarios" placeholder="Ingrese Comentarios"></textarea>
+                      <textarea class="form-control" rows="3" name="comentarios" id="comentarios" placeholder="Ingrese Comentarios"><?=$detalle->comentarios;?></textarea>
                   </div>
                   <div class="form-group">
                       <label for="diagnostico">Diagnostico Integral</label>
-                      <textarea class="form-control" rows="3" name="diagnostico" id="diagnostico" placeholder="Ingrese Diagnostico Integral"></textarea>
+                      <textarea class="form-control" rows="3" name="diagnostico" id="diagnostico" placeholder="Ingrese Diagnostico Integral"><?=$detalle->talla;?></textarea>
                   </div>
                   <div class="form-group">
                       <label for="tratamiento">Tratamiento</label>
-                      <textarea class="form-control" rows="3" name="tratamiento" id="tratamiento" placeholder="Ingrese Tratamiento"></textarea>
+                      <textarea class="form-control" rows="3" name="tratamiento" id="tratamiento" placeholder="Ingrese Tratamiento"><?=$detalle->talla;?></textarea>
                   </div>
                   <div class="form-group">
                       <label for="estudios">Interpretaci&oacute;n de Estudios <small>Laboratorio y Gabinete</small></label>
-                      <textarea class="form-control" rows="3" name="estudios" id="estudios" placeholder="Ingrese Interpretaci&oacute;n de Estudios"></textarea>
+                      <textarea class="form-control" rows="3" name="estudios" id="estudios" placeholder="Ingrese Interpretaci&oacute;n de Estudios"><?=$detalle->talla;?></textarea>
                   </div>
 
                   <!-- Carga de archivos -->
@@ -346,7 +347,6 @@
 </div>
 
 <script src="<?=base_url();?>assets/js/medical_clinic/historia_clinica.js"></script>
-<script src="<?=base_url();?>assets/js/medical_clinic/upload.js"></script>
 
 
 
@@ -369,46 +369,7 @@
         //initialize the javascript
           App.init();
 
-        $("#frm_nota").submit(function(evento){
-          evento.preventDefault();
-
-          if($("#nota").val())
-          {
-            $.ajax({
-              type: "POST",
-              url: "<?=base_url('historia_clinica/insertar_nota_evolucion');?>",
-              data: $(this).serialize()
-            }).done(function( msg ) {
-              if(msg==1)
-              {
-                var uniqid = Math.random().toString(36).substring(7);
-
-                  $("#accordion").prepend('<div class="panel panel-default">\
-                <div class="panel-heading">\
-                  <h4 class="panel-title">\
-                  <a class="collapsed"  data-toggle="collapse" data-parent="#accordion" href="#'+uniqid+'">\
-                    <i class="fa fa-angle-right"></i> <?=date('d/m/Y');?>\
-                  </a>\
-                  </h4>\
-                </div>\
-                <div id="'+uniqid+'" class="panel-collapse collapse">\
-                  <div class="panel-body">\
-                  '+$("#nota").val()+'\
-                  </div>\
-                </div>\
-              </div>');
-
-
-                  success('Historia Cl&iacute;nica', 'El registro se guardo exitosamente');
-               }
-               else
-               {
-                  error('Historia Cl&iacute;nica', 'Error al guardar el registro');
-               }
-               $("#nota").val('');
-            });
-          }
-        });
+       
       });
   </script>
   <!-- Bootstrap core JavaScript

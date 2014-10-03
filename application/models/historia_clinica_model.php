@@ -9,13 +9,13 @@ class Historia_clinica_model extends CI_Model {
 		return $query->result();
 	}
 
-	function get_table_where($where, $columna, $order_by, $table)
+	function get_table_where($where, $columna, $order_by, $table, $test='result')
 	{	
 		$this->db->where($where);
 		$this->db->order_by($columna, $order_by);
 		$query = $this->db->get($table);
 
-		return $query->result();
+		return $query->$test();
 	}
 
 	function query_select_cp($codigo_postal)
@@ -60,6 +60,54 @@ class Historia_clinica_model extends CI_Model {
 		$resultado=$this->db->insert_batch($tabla, $datos);
 		
 		return  $resultado;
+	}
+
+	function rel_hc_heredofamiliares($id_historia_clinica)
+	{
+		$query=$this->db->query("SELECT C.id_cat_heredofamiliar, C.nombre, 
+									CASE WHEN R.id_rel_hc_heredofamiliares THEN 'checked' END AS checked 
+								FROM cat_heredofamiliares AS C
+								LEFT JOIN rel_hc_heredofamiliares AS R ON C.id_cat_heredofamiliar=R.id_cat_heredofamiliar 
+									AND R.id_historia_clinica=$id_historia_clinica AND R.borrado=0
+								GROUP BY C.id_cat_heredofamiliar");
+
+		return $query->result(); 
+	}
+
+	function rel_hc_patologicos($id_historia_clinica)
+	{
+		$query=$this->db->query("SELECT C.id_cat_patologico, C.nombre, 
+									CASE WHEN R.id_rel_hc_patologicos THEN 'checked' END AS checked 
+								FROM cat_patologicos AS C
+								LEFT JOIN rel_hc_patologicos AS R ON C.id_cat_patologico=R.id_cat_patologico
+									AND R.id_historia_clinica=$id_historia_clinica AND R.borrado=0
+								GROUP BY C.id_cat_patologico");
+
+		return $query->result(); 
+	}
+
+	function rel_hc_no_patologicos($id_historia_clinica)
+	{
+		$query=$this->db->query("SELECT C.id_cat_no_patologico, C.nombre, 
+									CASE WHEN R.id_rel_hc_no_patologicos THEN 'checked' END AS checked 
+								FROM cat_no_patologicos AS C
+								LEFT JOIN rel_hc_no_patologicos AS R ON C.id_cat_no_patologico=R.id_cat_no_patologico
+									AND R.id_historia_clinica=$id_historia_clinica AND R.borrado=0
+								GROUP BY C.id_cat_no_patologico");
+
+		return $query->result(); 
+	}
+
+	function rel_hc_obstetricos($id_historia_clinica)
+	{
+		$query=$this->db->query("SELECT C.id_cat_obstetrico, C.nombre, 
+									CASE WHEN R.id_rel_hc_obstetricos THEN 'checked' END AS checked 
+								FROM cat_obstetricos AS C
+								LEFT JOIN rel_hc_obstetricos AS R ON C.id_cat_obstetrico=R.id_cat_obstetrico
+									AND R.id_historia_clinica=$id_historia_clinica AND R.borrado=0
+								GROUP BY C.id_cat_obstetrico");
+
+		return $query->result(); 
 	}
 }
 ?>

@@ -25,7 +25,7 @@ $(document).ready(function(){
 		{
 			$("#lugar_n").css('display', 'block');
 
-			$.ajax({url: "historia_clinica/select_municipios",
+			$.ajax({url: base_url+"historia_clinica/select_municipios",
 				type:'POST',
 				data:{id:$(this).val()},
 				success:function(result){
@@ -44,7 +44,7 @@ $(document).ready(function(){
 	$("#codigo_postal").on('keyup', function(){
 		if($(this).val().length==5)
 		{
-			$.ajax({url: "historia_clinica/select_codigo_postal",
+			$.ajax({url: base_url+"historia_clinica/select_codigo_postal",
 				type:'POST',
 				data:{id:$(this).val()},
 				success:function(result){
@@ -60,7 +60,7 @@ $(document).ready(function(){
 
 		$.ajax({
 		  type: "POST",
-		  url: "historia_clinica/insertar",
+		  url: base_url+"historia_clinica/insertar",
 		  data: $(this).serialize()
 		}).done(function( msg ) {
 
